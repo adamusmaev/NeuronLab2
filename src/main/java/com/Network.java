@@ -12,6 +12,7 @@ public class Network {
 
     private List<Synapse> synapseList = new ArrayList<>();
     private List<Level> levelList = new ArrayList<>();
+    //private List<List<>>
 
     public void addRandomWeightForSynapse() {
         Random r = new Random();
@@ -47,7 +48,7 @@ public class Network {
         throw new IllegalArgumentException("Synapse not found");
     }
 
-    public void training() {
+    public Neuron training() {
         this.countDMin();
         List<Double> dMinList = new ArrayList<>();
         Neuron neuronWinner = getNeuronWinner();
@@ -75,7 +76,7 @@ public class Network {
             }
             radius = radius - 0.5;
         }
-
+        return neuronWinner;
     }
 
     public Neuron getNeuronWinner() {
@@ -84,7 +85,7 @@ public class Network {
             Neuron neuronTmp = levelList.get(1).getNeuronList().get(i);
             if (neuron.getDMin() > neuronTmp.getDMin()) neuron = neuronTmp;
         }
-        System.out.println(neuron);
+        //System.out.println(neuron);
         return neuron;
     }
 }

@@ -44,26 +44,29 @@ public class Main {
             level1.getNeuronList().get(2).setValue(0.941);
             level1.getNeuronList().get(3).setValue(0.090);
             level1.getNeuronList().get(4).setValue(0.0);
-            network.training();
+            System.out.println(network.training());
 
             level1.getNeuronList().get(0).setValue(0.05);
             level1.getNeuronList().get(1).setValue(0.02);
             level1.getNeuronList().get(2).setValue(0.058);
             level1.getNeuronList().get(3).setValue(0.93);
             level1.getNeuronList().get(4).setValue(1.0);
-            network.training();
+            System.out.println(network.training());
 
             level1.getNeuronList().get(0).setValue(0.27);
             level1.getNeuronList().get(1).setValue(0.36);
             level1.getNeuronList().get(2).setValue(0.41);
             level1.getNeuronList().get(3).setValue(0.5);
             level1.getNeuronList().get(4).setValue(1.0);
-            network.training();
+            System.out.println(network.training());
+
 
         }
         for (int i = 0; i < network.getSynapseList().size(); i++) {
             System.out.println(network.getSynapseList().get(i));
         }
+        SOM som = new SOM(3,3, network);
+        //som.printSom();
         while (true) {
             Scanner in = new Scanner(System.in);
             System.out.println("Введите размых крыльев");
@@ -86,8 +89,8 @@ public class Main {
             level1.getNeuronList().get(2).setValue(value3);
             level1.getNeuronList().get(3).setValue(value4);
             level1.getNeuronList().get(4).setValue(value5);
-            network.training();
+            System.out.println(network.training());
+            som.addNeuronInSOM(network.training());
         }
-
     }
 }
