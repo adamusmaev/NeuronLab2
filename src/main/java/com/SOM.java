@@ -11,16 +11,18 @@ import java.util.Map;
 public class SOM {
 
     private Map<Integer, List<Double>> map = new HashMap<>();
-    Network network;
+    private Map<Neuron, Neuron> mapInputAndOutputNeuron = new HashMap<>();
     int x;
     int y;
-    private List<Neuron> neuronList = new ArrayList<>();
+    private Network network;
 
     public SOM(int x, int y, Network network) {
+        int q = 0;
         for (int i = 0; i < y; i++) {
             map.put(i, new ArrayList<>());
             for (int j = 0; j < x; j++) {
                 map.get(i).add(j, 0.0);
+                q++;
             }
         }
         this.x = x;
@@ -37,12 +39,22 @@ public class SOM {
         }
     }
 
-    public void addNeuronInSOM(Neuron neuron) {
-        neuronList.add(neuron);
-        System.out.println(neuronList);
-        //Double dMin = neuron.getDMin();
-        //char neuronName = neuron.getName().charAt(neuron.getName().length() - 1);
-        //Integer clusterNumber = Integer.valueOf(String.valueOf(neuronName));
-       // Double value = map.get(clusterNumber).get();
+    public void addNeuronInSOM(Neuron neuron, Integer parameterNumber) {
+        char neuronNumberChar = neuron.getName().charAt(neuron.getName().length() - 1);
+        Integer neuronNumber = Integer.valueOf(String.valueOf(neuronNumberChar));
+        int q = 0;
+        for (int i = 0; i < map.size(); i++) {
+            for (int j = 0; j < map.get(i).size(); j++) {
+                if (neuronNumber == q) {
+                    Double parameterValue = network.getLevelList().get(0).getNeuronList().get(parameterNumber).getValue();
+                    Double currentValue = map.get(i).get(j);
+                    if (currentValue < parameterValue) {
+                        map.get(i).set(j, parameterValue);
+                    }
+                }
+                q++;
+            }
+        }
+
     }
 }

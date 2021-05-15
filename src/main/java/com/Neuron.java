@@ -11,6 +11,9 @@ public class Neuron {
 
     private Double dMin = 0.0;
 
+    private int x;
+    private  int y;
+
     public Neuron(String name) {
         this.name = name;
     }
